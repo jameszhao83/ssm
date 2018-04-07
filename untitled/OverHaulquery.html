@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>检修辅助管理系统</title>
+    <link rel="stylesheet" href="JS/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link  rel="stylesheet" href="JS/datatimepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="JS/css/buttons.css">
+</head>
+<body  style="padding-left: 0px;padding-right: 0px">
+<div ng-app="myapp" style="padding-top: 20px">
+
+
+
+    <div ng-controller="seController"  class="container" >
+    <div  class="row"  >
+        <div   class="col-lg-2">
+
+            <ul class="nav nav-pills  nav-stacked">
+                <li role="presentation" class="active"><a href="#">检修上报</a></li>
+                <li role="presentation"><a href="#">待审批</a></li>
+                <li role="presentation"><a href="#">历史记录</a></li>
+            </ul>
+
+        </div>
+
+
+        <div  class="col-lg-10">
+
+        <a href="#" class="button button-3d button-primary button-rounded"  id="baosonganniu" >检修上报</a>
+
+
+
+        <br><br>
+        <h7>检修开始时间<input type="text" class="form_datetime1" readonly>  检修结束时间<input type="text" class="endtime" readonly>
+            检修对象
+            <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="10"
+
+                   data-source=
+                           "[&quot;营销业务应用&quot;,&quot;电力交易&quot;,&quot;营销辅助决策&quot;,&quot;电力交易&quot;,&quot;营销稽查&quot;,
+&quot;计量资产全寿命&quot;,&quot;营销交易服务系统&quot;,&quot;营销gis应用系统&quot;,&quot;应急指挥&quot;,&quot;企业门户&quot;,&quot;统一车辆管理&quot;,
+ &quot;云终端&quot;,&quot;计量资产全寿命&quot;,&quot;95598智能手机移动抢修系统&quot;,&quot;应急指挥&quot;,&quot;输电网安全&quot;,&quot;供电可靠性&quot;,
+&quot;输变电可靠性&quot;,&quot;风险管理&quot;,&quot;电能质量监测&quot;]"            >
+
+</h7>
+
+            <h7 class="pull-right"> <button class="btn btn-info" >查询</button></h7>
+
+
+        <table class="table  table-striped  table-bordered  table-hover  table-condensed"  ng-show="car.length">
+            <tr   style="background-color:lightseagreen;">
+                <th>序号</th>
+                <th>检修工作名称</th>
+                <th>检修对象</th>
+                <th>检修开始时间</th>
+                <th>检修结束时间</th>
+                <th>工作负责人</th>
+                <th>操作</th>
+            </tr>
+
+            <tr ng-repeat="item in car">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.price}}</td>
+                <td>检修结束时间
+                </td>
+                <td>检修结束时间检修结束时间检修结束时间</td>
+                <td style="align-self: center"><button  type="button" class="btn btn-danger" ng-click="removeOne(item.id)"  align="right" >删除</button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button  type="button" class="btn btn-primary" ng-click="removeOne(item.id)">上报</button>
+                &nbsp;&nbsp;&nbsp;
+                <button  type="button" class="btn btn-info" >打印会审单</button></td>
+            </tr>
+
+        </table>
+        <nav aria-label="Page navigation"  style="align-content: center">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+<p ng-show="!car.length">你的购物车是空的</p>
+
+
+        </div>
+
+
+    </div>
+
+    </div>
+</div>
+
+
+<!------------------检修添加窗口------------------------------start-------------------------------------------------------------------------------------------------------------->
+<div  class="modal" id="myModal"   tabindex="-1" role="window" aria-labelledby="myModalLabel"  aria-hidden="true"  >
+    <div class="modal-dialog" style="width: 800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">
+                    X
+                </button>
+<h4 class="modal-title" id="myModalLabel">检修计划</h4>
+
+            </div>
+            <div class="modal-body">
+                <table  class="table" >
+                    <tr>
+                        <td>检修计划名称：</td>
+                       <td colspan="7"> <input type="text" size="60">
+                           <a href="#" id="OverHaultitle"  rel="popover"
+                                                                         data-content="要求言简意赅,一句话概括本次检修的主要工作内容,如:电力交易升级至v5.6.7,营销业务应用开展应急演练！"
+    data-original-title="检修计划名称编写提示!">?</a>
+                       </td>
+                    </tr>
+<tr>
+    <td> 检修对象：</td>
+    <td colspan="7">              <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="10"
+  data-source="[&quot;营销业务应用&quot;,&quot;电力交易&quot;,&quot;营销辅助决策&quot;,&quot;电力交易&quot;,&quot;营销稽查&quot;,
+&quot;计量资产全寿命&quot;,&quot;营销交易服务系统&quot;,&quot;营销gis应用系统&quot;,&quot;应急指挥&quot;,&quot;企业门户&quot;,&quot;统一车辆管理&quot;,
+ &quot;云终端&quot;,&quot;计量资产全寿命&quot;,&quot;95598智能手机移动抢修系统&quot;,&quot;应急指挥&quot;,&quot;输电网安全&quot;,&quot;供电可靠性&quot;,
+&quot;输变电可靠性&quot;,&quot;风险管理&quot;,&quot;电能质量监测&quot;]" ></td>
+</tr>
+
+                    <tr><td>检修负责人</td>
+                        <td colspan="3">
+
+<input type="text">
+                        </td>
+                        <td>检修监护人</td>
+                        <td colspan="3">
+                            <input type="text">
+
+                        </td></tr>
+                    <tr>
+                        <td>支撑人员</td>
+                        <td colspan="7"> <input type="text" size="60"></td>
+                    </tr>
+                   <tr><td>是否停运</td>
+                       <td colspan="3">
+                           <select id="isStop">
+                               <option value ="1">是</option>
+                               <option value ="0"  selected>否</option>
+                           </select>
+                       </td>
+                       <td>检修类型</td>
+                       <td colspan="3">
+                           <select id="OverHaulType">
+                               <option value ="-1"></option>
+                               <option value ="0" id="commOverHaul">日常检修</option>
+                               <option value ="1">二级临时</option>
+                               <option value ="2">二级周检</option>
+                               <option value ="3">二级月检</option>
+                               <option value ="4">一级月检</option>
+                               <option value ="5">一级周检</option>
+                           </select>&nbsp;&nbsp;&nbsp;<a href="#" id="hiddenOptionTicket" style="display:none;" >编写操作票</a>
+                           <a href="#" id="hiddenOverHaulTypePlay" style="display:none;" onclick="window.open('uploadPlan.html')">上传检修方案</a>
+                           <a href="#" id="planprompt"  rel="popover"
+                              data-content="检修方案需提供科信部签字的信息系统包括:95598、电力市场交易、人资招聘、营销业务应用、电子商务平台、ERP、PMS、协同办公、网络大学、邮件、统一权限、共用BPM、企业门户、目录、数据交换"
+                              data-original-title="提示"  style="display: none;">?</a>
+
+                       </td></tr>
+                    <tr><td>是否属于检修窗口</td>
+                        <td colspan="3">
+                            <select id="isOverhaulWindow">
+                                <option value ="1">是</option>
+                                <option value ="0" selected>否</option>
+                            </select>
+                            <a href="#">查看2017年度检修窗口</a>
+                        </td>
+                        <td>检修来源</td>
+                        <td colspan="3">
+                            <select id="OverhaulSource">
+                                <option value ="1">信通公司</option>
+                                <option value ="2">国网公司</option>00
+                                <option value ="3">营销部</option>
+                                <option value ="4">运检部</option>
+                                <option value ="5">财务部</option>
+                                <option value ="6">运监中心</option>
+                                <option value ="7">安监部</option>
+                            </select>
+                            <a href="#" id="sgccprompt"  rel="popover"
+                               data-content="国网下达检修的定义是,国网通过I6000下达检修,非项目管控组通过邮件形式下达！"
+                               data-original-title="提示"  style="display: none;">?</a>
+                        </td>
+                    <tr>
+                        <td>国网联调</td><td>
+                        <select id="isadjusting">
+                        <option value ="1">是</option>
+                        <option value ="0" selected>否</option>
+                    </select></td>
+                        <td>灾备联调</td><td>
+                        <select id="isDR">
+                        <option value ="1">是</option>
+                        <option value ="0" selected>否</option>
+                    </select></td>
+                        <td>总部客服审批</td><td>
+                        <select id="isSGCCapprove">
+                        <option value ="1">是</option>
+                        <option value ="0" selected>否</option>
+                    </select></td>
+                        <td>总部营销审批</td><td>
+                        <select id="isSgccSaleapprove">
+                        <option value ="1">是</option>
+                        <option value ="0" selected>否</option>
+                    </select></td>
+                    </tr>
+                    <tr><td>检修开始时间</td>
+                        <td colspan="3">
+                            <input type="text" size="17" value=""  class="windowstarttime"   readonly>
+                        </td>
+                        <td>检修结束时间</td>
+                        <td colspan="3"><input type="text" class="windowendtime" size="17" readonly></td></tr>
+                    <tr>
+                        <td>检修工作内容
+
+                                <a href="#" id="contentprompt"  rel="popover"
+                                   data-content="检修内容需言简意赅,涵盖本次检修工作所有内容,不可将操作步骤列入！"
+                                   data-original-title="检修内容编写提示!">?</a>
+
+                        </td>
+                        <td colspan="7"><textarea rows="7" cols="80"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>检修影响范围
+                            <a href="#" id="scopeprompt"  rel="popover"
+                               data-content="影响范围必须要由3个角度写起,1、系统是否停运;2、是否影响使用用户使用;3、与I6000接口是否中断;4、如有其它情况必须明确其影响范围。如:'检修期间,电力交易系统停运,对所有用户不可用,与I6000接口中断,不影响外网电力交易对我提供服务。'"
+                               data-original-title="影响范围编写提示!">?</a>
+                        </td>
+                        <td colspan="7"><textarea rows="5" cols="80"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>等级风险评估</td>
+                        <td colspan="7"><textarea rows="5" cols="80"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>风险防范措施</td>
+                        <td colspan="7"><textarea rows="4" cols="80"></textarea></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-success">发送</a>
+                <a href="#" class="btn btn-success">保存</a>
+                <a href="#" class="btn  btn-danger" data-dismiss="modal">取消</a>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<!----------------检修添加窗口------------------------------end------------------------------------------------------------------------------------------------------------>
+<!----------------检修方案上传------------------------------start------------------------------------------------------------------------------------------------------------>
+<div  class="modal fade" id="uploadplan"   tabindex="-1" role="window" aria-labelledby="myModalLabelw"  aria-hidden="true">
+    <div class="modal-dialog" style="width: 800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"  aria-hidden="true">
+                    X
+                </button>
+                <h4 class="modal-title" id="myModalLabelw">检修计划</h4>
+
+            </div>
+            <div class="modal-body">
+                </div></div></div></div>
+
+<!----------------检修方案上传------------------------------end------------------------------------------------------------------------------------------------------------>
+
+
+<script type="text/javascript" src="JS/another/jquery.js"></script>
+<script  type="text/javascript" src="JS/angular.js"></script>
+<script  type="text/javascript" src="JS/ng-03.js"></script>
+<script  type="text/javascript" src="JS/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="JS/datatimepicker/bootstrap-datetimepicker.min.js"></script>
+<script  type="text/javascript"  src="JS/typeahead.js"></script>
+<script type="text/javascript">
+    $(function (){
+        $("#sgccprompt").popover();
+        $("#planprompt").popover();
+        $("#scopeprompt").popover();
+        $("#contentprompt").popover();
+        $("#OverHaultitle").popover();
+        $("#hiddenOptionTicket").click(function () {
+                alert("dddd");
+        })
+        $("#OverHaulType").change(function() {
+            var selectValue = $("#OverHaulType").val();
+
+            if(selectValue == 0){
+                $('#hiddenOptionTicket').show();
+            }else{
+                $('#hiddenOptionTicket').hide();
+            }
+            if(selectValue == 4  ||  selectValue ==5){
+                $('#hiddenOverHaulTypePlay').show();
+                $('#planprompt').show();
+            }else{
+                $('#hiddenOverHaulTypePlay').hide();
+                $('#planprompt').hide();
+            }
+            
+        });
+        
+        $('#OverhaulSource').change(function () {
+            var  selectValue=$('#OverhaulSource').val();
+            if(selectValue == 2){
+                $('#sgccprompt').show();
+
+            }else{
+                $('#sgccprompt').hide();
+
+            }
+        });
+
+        $("#baosonganniu").click(function () {
+            $("#myModal").modal({backdrop:"static"});
+        })
+
+
+
+
+    });
+      $(".form_datetime1").datetimepicker({
+        format:"yyyy-mm-dd"
+      });
+    $(".endtime").datetimepicker({
+        format:"yyyy-mm-dd"
+    });
+
+      $(".windowstarttime").datetimepicker({
+          format:'yyyy-mm-dd hh:ii'
+      });
+      $(".windowendtime").datetimepicker({
+          format:'yyyy-mm-dd hh:ii'
+      });
+
+
+</script>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,29 @@
+ "[&quot;ERP&quot;,&quot;ERP高级应用&quot;,&quot;财务管控&quot;,&quot;营销应用&quot;,&quot;营销辅助决策&quot;,&quot;农电管理&quot;,&quot;经济法律&quot;,&quot;应急管理&quot;,&quot;运营监测&quot;,&quot;企业门户&quot;,&quot;外网网站&quot;,&quot;远程培训&quot;,&quot;非结构化&quot;,&quot;数据中心&quot;,&quot;数据交换&quot;,&quot;统一视频&quot;,&quot;TMS&quot;,&quot;查询IAS
+干部管理&quot;,&quot;电网GIS&quot;,&quot;综合查询&quot;,&quot;BPM&quot;,&quot;统一权限&quot;,&quot;海量数据&quot;,&quot;凭证协同&quot;,&quot;资产全寿命&quot;,&quot;员工报销&quot;,&quot;IMS系统&quot;,&quot;营销稽查&quot;,&quot;营销基础数据平台&quot;,&quot;营销GIS&quot;,&quot;计量资产全寿命周期&quot;,&quot;
+生产管理（生产管理完全单轨运行后，不再纳入评价考核）&quot;,&quot;PMS2.0（设备资产精益管理系统）&quot;,&quot;全国统一电力市场（电力市场2.0）&quot;,&quot;数据管理服务平台&quot;,&quot;统一数据交换平台&quot;,&quot;
+乡镇供电所及班组一体化信息系统&quot;,&quot;统一数据保护与监控平台，共39个系统；直属单位纳入评价的系统是指公司统一推广的ERP&quot;,&quot;人资管控&quot;,&quot;财务管控&quot;,&quot;经济法律&quot;,&quot;企业门户&quot;,&quot;
+外网网站&quot;,&quot;协同办公&quot;,&quot;远程培训&quot;,&quot;IMS系统；国网信通公司纳入评价的系统是省公司纳入评价的系统加上人资集约&quot;,&quot;电子商务平台&quot;,&quot;规划计划&quot;,&quot;基建管控&quot;,&quot;95598&quot;,&quot;纪检监察&quot;,&quot;
+国际合作&quot;,&quot;审计综合&quot;,&quot;舆情监测&quot;,&quot;安全监督&quot;,&quot;档案馆&quot;,&quot;电子文件&quot;,&quot;流程监控&quot;,&quot;主数据&quot;,&quot;协同办公&quot;,&quot;内网邮件&quot;,&quot;呼叫中心系统&quot;]"
+
+
+
+
+
+ "[&quot;营销业务应用&quot;,&quot;电力交易&quot;,&quot;营销辅助决策&quot;,&quot;电力交易&quot;,&quot;营销稽查&quot;,
+&quot;计量资产全寿命&quot;,&quot;营销交易服务系统&quot;,&quot;营销gis应用系统&quot;,&quot;应急指挥&quot;,&quot;企业门户&quot;,&quot;统一车辆管理&quot;,
+ &quot;云终端&quot;,&quot;计量资产全寿命&quot;,&quot;95598智能手机移动抢修系统&quot;,&quot;应急指挥&quot;,&quot;输电网安全&quot;,&quot;供电可靠性&quot;,
+&quot;输变电可靠性&quot;,&quot;风险管理&quot;,&quot;电能质量监测&quot;]"
+
+
+ "[&quot;ERP&quot;,&quot;ERP高级应用&quot;,&quot;财务管控&quot;,&quot;营销应用&quot;,&quot;营销辅助决策&quot;,&quot;农电管理&quot;,&quot;经济法律&quot;,&quot;应急管理&quot;,&quot;运营监测&quot;,&quot;企业门户&quot;,&quot;外网网站&quot;,&quot;远程培训&quot;,&quot;非结构化&quot;,&quot;数据中心&quot;,&quot;数据交换&quot;,&quot;统一视频&quot;,&quot;TMS&quot;
+
+
+
+
+data-source=
+"[&quot;营销业务应用&quot;,&quot;电力交易&quot;,&quot;营销辅助决策&quot;,&quot;电力交易&quot;,&quot;营销稽查&quot;,
+  &quot;计量资产全寿命&quot;,&quot;营销交易服务系统&quot;,&quot;营销gis应用系统&quot;,&quot;应急指挥&quot;,&quot;企业门户&quot;,&quot;统一车辆管理&quot;,
+  &quot;云终端&quot;]"
+
+data-source=
+ "[&quot;计量资产全寿命&quot;,&quot;95598智能手机移动抢修系统&quot;]

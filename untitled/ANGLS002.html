@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="JS/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link  rel="stylesheet" href="JS/datatimepicker/bootstrap-datetimepicker.min.css">
+
+</head>
+<body>
+
+
+<div ng-app="myapp">
+
+
+
+    <div ng-controller="firstController">
+
+
+
+
+
+<div style="height:141px;width: auto;background:url('index.png') no-repeat;">
+    <h7 style="text-align:right;">~</h7>
+    <h1 style="text-align:right;">今日检修计划</h1>
+    <h3 style="text-align:right;">{{date | date:'yyyy年MM月dd日 HH:mm:ss'}} </h3>
+</div>
+
+<table class="table  table-striped table-hover" >
+
+    <tr class="success">
+        <th id="quanping">序号</th>
+        <th>检修工作名称</th><th>检修开始时间</th><th>检修结束时间</th>
+        <th>检修类型</th><th>操作人</th><th>监护人</th>
+    </tr>
+    <tr>
+        <td>asdfadfsaf</td> <td>asdfadfsaf</td> <td>asdfadfsaf</td>
+        <td>asdfadfsaf</td>
+        <td>asdfadfsaf</td> <td>asdfadfsaf</td><td>asdfadfsaf</td>
+    </tr>
+
+    <tr>
+        <td>asdfadfsaf</td> <td>asdfadfsaf</td> <td>asdfadfsaf</td>
+        <td>asdfadfsaf</td>
+        <td>asdfadfsaf</td> <td>asdfadfsaf</td><td>asdfadfsaf</td>
+    </tr>
+
+    <tr>
+        <td>asdfadfsaf</td> <td>asdfadfsaf</td> <td>asdfadfsaf</td>
+        <td>asdfadfsaf</td>
+        <td>asdfadfsaf</td> <td>asdfadfsaf</td><td>asdfadfsaf</td>
+    </tr>
+
+    <tr>
+        <td>asdfadfsaf</td> <td>asdfadfsaf</td> <td>asdfadfsaf</td>
+        <td>asdfadfsaf</td>
+        <td>asdfadfsaf</td> <td>asdfadfsaf</td><td>asdfadfsaf</td>
+    </tr>
+</table>
+
+    </div></div>
+
+<script type="text/javascript" src="JS/another/jquery.js"></script>
+<script  type="text/javascript" src="JS/angular.js"></script>
+
+<script  type="text/javascript" src="JS/AG02.js"></script>
+<script type="text/javascript">
+
+
+    $("#quanping").click(function(){
+        requestFullScreen();
+    });
+
+    //进入全屏
+    function requestFullScreen() {
+            var de = document.documentElement;
+             if (de.requestFullscreen) {
+                    de.requestFullscreen();
+                 } else if (de.mozRequestFullScreen) {
+                     de.mozRequestFullScreen();
+                 } else if (de.webkitRequestFullScreen) {
+                     de.webkitRequestFullScreen();
+                 }
+         }
+     //退出全屏
+     function exitFullscreen() {
+            var de = document;
+             if (de.exitFullscreen) {
+                     de.exitFullscreen();
+                 } else if (de.mozCancelFullScreen) {
+                     de.mozCancelFullScreen();
+                 } else if (de.webkitCancelFullScreen) {
+                     de.webkitCancelFullScreen();
+                 }
+         }
+
+
+</script>
+</body>
+
+
+
+</html>
