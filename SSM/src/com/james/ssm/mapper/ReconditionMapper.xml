@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.james.ssm.mapper.ReconditionMapper">
+  <resultMap id="BaseResultMap" type="com.james.ssm.po.Recondition">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="NU" jdbcType="VARCHAR" property="nu" />
+    <result column="RNAME" jdbcType="VARCHAR" property="rname" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="RSTARTTIME" jdbcType="TIMESTAMP" property="rstarttime" />
+    <result column="RENDTIME" jdbcType="TIMESTAMP" property="rendtime" />
+    <result column="CONFIRM" jdbcType="BIT" property="confirm" />
+    <result column="CREATEMAN" jdbcType="INTEGER" property="createman" />
+    <result column="WATCHMAN" jdbcType="INTEGER" property="watchman" />
+    <result column="AUDITMAN" jdbcType="INTEGER" property="auditman" />
+    <result column="RTYPE" jdbcType="VARCHAR" property="rtype" />
+    <result column="RLEVE" jdbcType="VARCHAR" property="rleve" />
+    <result column="RCONTEXT" jdbcType="VARCHAR" property="rcontext" />
+    <result column="SCOPE" jdbcType="VARCHAR" property="scope" />
+    <result column="SGCCCONFIRM" jdbcType="BIT" property="sgccconfirm" />
+    <result column="DPCONFIRM" jdbcType="BIT" property="dpconfirm" />
+    <result column="SGCCSDCONFIRM" jdbcType="BIT" property="sgccsdconfirm" />
+    <result column="RWINDOW" jdbcType="BIT" property="rwindow" />
+    <result column="ISDOWN" jdbcType="BIT" property="isdown" />
+    <result column="ISRUNTYPECHANGE" jdbcType="BIT" property="isruntypechange" />
+    <result column="RISK" jdbcType="VARCHAR" property="risk" />
+    <result column="TIMECODE" jdbcType="VARCHAR" property="timecode" />
+    <result column="SGCCCSCONFIRM" jdbcType="BIT" property="sgcccsconfirm" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, NU, RNAME, CREATETIME, RSTARTTIME, RENDTIME, CONFIRM, CREATEMAN, WATCHMAN, AUDITMAN,
+    RTYPE, RLEVE, RCONTEXT, SCOPE, SGCCCONFIRM, DPCONFIRM, SGCCSDCONFIRM, RWINDOW, ISDOWN, 
+    ISRUNTYPECHANGE, RISK, TIMECODE, SGCCCSCONFIRM
+  </sql>
+  <select id="selectByExample" parameterType="com.james.ssm.po.ReconditionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from RECONDITION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from RECONDITION
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from RECONDITION
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.james.ssm.po.ReconditionExample">
+
+    delete from RECONDITION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.james.ssm.po.Recondition">
+    insert into RECONDITION (NU, RNAME,
+      CREATETIME, RSTARTTIME, RENDTIME, 
+      CONFIRM, CREATEMAN, WATCHMAN, 
+      AUDITMAN, RTYPE, RLEVE, 
+      RCONTEXT, SCOPE, SGCCCONFIRM, 
+      DPCONFIRM, SGCCSDCONFIRM, RWINDOW, 
+      ISDOWN, ISRUNTYPECHANGE, RISK, 
+      TIMECODE, SGCCCSCONFIRM)
+    values ( #{nu,jdbcType=VARCHAR}, #{rname,jdbcType=VARCHAR},
+      #{createtime,jdbcType=TIMESTAMP}, #{rstarttime,jdbcType=TIMESTAMP}, #{rendtime,jdbcType=TIMESTAMP}, 
+      #{confirm,jdbcType=BIT}, #{createman,jdbcType=INTEGER}, #{watchman,jdbcType=INTEGER}, 
+      #{auditman,jdbcType=INTEGER}, #{rtype,jdbcType=VARCHAR}, #{rleve,jdbcType=VARCHAR}, 
+      #{rcontext,jdbcType=VARCHAR}, #{scope,jdbcType=VARCHAR}, #{sgccconfirm,jdbcType=BIT}, 
+      #{dpconfirm,jdbcType=BIT}, #{sgccsdconfirm,jdbcType=BIT}, #{rwindow,jdbcType=BIT}, 
+      #{isdown,jdbcType=BIT}, #{isruntypechange,jdbcType=BIT}, #{risk,jdbcType=VARCHAR}, 
+      #{timecode,jdbcType=VARCHAR}, #{sgcccsconfirm,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.james.ssm.po.Recondition">
+    insert into RECONDITION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="nu != null">
+        NU,
+      </if>
+      <if test="rname != null">
+        RNAME,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="rstarttime != null">
+        RSTARTTIME,
+      </if>
+      <if test="rendtime != null">
+        RENDTIME,
+      </if>
+      <if test="confirm != null">
+        CONFIRM,
+      </if>
+      <if test="createman != null">
+        CREATEMAN,
+      </if>
+      <if test="watchman != null">
+        WATCHMAN,
+      </if>
+      <if test="auditman != null">
+        AUDITMAN,
+      </if>
+      <if test="rtype != null">
+        RTYPE,
+      </if>
+      <if test="rleve != null">
+        RLEVE,
+      </if>
+      <if test="rcontext != null">
+        RCONTEXT,
+      </if>
+      <if test="scope != null">
+        SCOPE,
+      </if>
+      <if test="sgccconfirm != null">
+        SGCCCONFIRM,
+      </if>
+      <if test="dpconfirm != null">
+        DPCONFIRM,
+      </if>
+      <if test="sgccsdconfirm != null">
+        SGCCSDCONFIRM,
+      </if>
+      <if test="rwindow != null">
+        RWINDOW,
+      </if>
+      <if test="isdown != null">
+        ISDOWN,
+      </if>
+      <if test="isruntypechange != null">
+        ISRUNTYPECHANGE,
+      </if>
+      <if test="risk != null">
+        RISK,
+      </if>
+      <if test="timecode != null">
+        TIMECODE,
+      </if>
+      <if test="sgcccsconfirm != null">
+        SGCCCSCONFIRM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nu != null">
+        #{nu,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null">
+        #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rstarttime != null">
+        #{rstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rendtime != null">
+        #{rendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirm != null">
+        #{confirm,jdbcType=BIT},
+      </if>
+      <if test="createman != null">
+        #{createman,jdbcType=INTEGER},
+      </if>
+      <if test="watchman != null">
+        #{watchman,jdbcType=INTEGER},
+      </if>
+      <if test="auditman != null">
+        #{auditman,jdbcType=INTEGER},
+      </if>
+      <if test="rtype != null">
+        #{rtype,jdbcType=VARCHAR},
+      </if>
+      <if test="rleve != null">
+        #{rleve,jdbcType=VARCHAR},
+      </if>
+      <if test="rcontext != null">
+        #{rcontext,jdbcType=VARCHAR},
+      </if>
+      <if test="scope != null">
+        #{scope,jdbcType=VARCHAR},
+      </if>
+      <if test="sgccconfirm != null">
+        #{sgccconfirm,jdbcType=BIT},
+      </if>
+      <if test="dpconfirm != null">
+        #{dpconfirm,jdbcType=BIT},
+      </if>
+      <if test="sgccsdconfirm != null">
+        #{sgccsdconfirm,jdbcType=BIT},
+      </if>
+      <if test="rwindow != null">
+        #{rwindow,jdbcType=BIT},
+      </if>
+      <if test="isdown != null">
+        #{isdown,jdbcType=BIT},
+      </if>
+      <if test="isruntypechange != null">
+        #{isruntypechange,jdbcType=BIT},
+      </if>
+      <if test="risk != null">
+        #{risk,jdbcType=VARCHAR},
+      </if>
+      <if test="timecode != null">
+        #{timecode,jdbcType=VARCHAR},
+      </if>
+      <if test="sgcccsconfirm != null">
+        #{sgcccsconfirm,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.james.ssm.po.ReconditionExample" resultType="java.lang.Long">
+    select count(*) from RECONDITION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update RECONDITION
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.nu != null">
+        NU = #{record.nu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rname != null">
+        RNAME = #{record.rname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rstarttime != null">
+        RSTARTTIME = #{record.rstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rendtime != null">
+        RENDTIME = #{record.rendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.confirm != null">
+        CONFIRM = #{record.confirm,jdbcType=BIT},
+      </if>
+      <if test="record.createman != null">
+        CREATEMAN = #{record.createman,jdbcType=INTEGER},
+      </if>
+      <if test="record.watchman != null">
+        WATCHMAN = #{record.watchman,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditman != null">
+        AUDITMAN = #{record.auditman,jdbcType=INTEGER},
+      </if>
+      <if test="record.rtype != null">
+        RTYPE = #{record.rtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rleve != null">
+        RLEVE = #{record.rleve,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rcontext != null">
+        RCONTEXT = #{record.rcontext,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scope != null">
+        SCOPE = #{record.scope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sgccconfirm != null">
+        SGCCCONFIRM = #{record.sgccconfirm,jdbcType=BIT},
+      </if>
+      <if test="record.dpconfirm != null">
+        DPCONFIRM = #{record.dpconfirm,jdbcType=BIT},
+      </if>
+      <if test="record.sgccsdconfirm != null">
+        SGCCSDCONFIRM = #{record.sgccsdconfirm,jdbcType=BIT},
+      </if>
+      <if test="record.rwindow != null">
+        RWINDOW = #{record.rwindow,jdbcType=BIT},
+      </if>
+      <if test="record.isdown != null">
+        ISDOWN = #{record.isdown,jdbcType=BIT},
+      </if>
+      <if test="record.isruntypechange != null">
+        ISRUNTYPECHANGE = #{record.isruntypechange,jdbcType=BIT},
+      </if>
+      <if test="record.risk != null">
+        RISK = #{record.risk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timecode != null">
+        TIMECODE = #{record.timecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sgcccsconfirm != null">
+        SGCCCSCONFIRM = #{record.sgcccsconfirm,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update RECONDITION
+    set ID = #{record.id,jdbcType=INTEGER},
+      NU = #{record.nu,jdbcType=VARCHAR},
+      RNAME = #{record.rname,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      RSTARTTIME = #{record.rstarttime,jdbcType=TIMESTAMP},
+      RENDTIME = #{record.rendtime,jdbcType=TIMESTAMP},
+      CONFIRM = #{record.confirm,jdbcType=BIT},
+      CREATEMAN = #{record.createman,jdbcType=INTEGER},
+      WATCHMAN = #{record.watchman,jdbcType=INTEGER},
+      AUDITMAN = #{record.auditman,jdbcType=INTEGER},
+      RTYPE = #{record.rtype,jdbcType=VARCHAR},
+      RLEVE = #{record.rleve,jdbcType=VARCHAR},
+      RCONTEXT = #{record.rcontext,jdbcType=VARCHAR},
+      SCOPE = #{record.scope,jdbcType=VARCHAR},
+      SGCCCONFIRM = #{record.sgccconfirm,jdbcType=BIT},
+      DPCONFIRM = #{record.dpconfirm,jdbcType=BIT},
+      SGCCSDCONFIRM = #{record.sgccsdconfirm,jdbcType=BIT},
+      RWINDOW = #{record.rwindow,jdbcType=BIT},
+      ISDOWN = #{record.isdown,jdbcType=BIT},
+      ISRUNTYPECHANGE = #{record.isruntypechange,jdbcType=BIT},
+      RISK = #{record.risk,jdbcType=VARCHAR},
+      TIMECODE = #{record.timecode,jdbcType=VARCHAR},
+      SGCCCSCONFIRM = #{record.sgcccsconfirm,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.james.ssm.po.Recondition">
+
+    update RECONDITION
+    <set>
+      <if test="nu != null">
+        NU = #{nu,jdbcType=VARCHAR},
+      </if>
+      <if test="rname != null">
+        RNAME = #{rname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rstarttime != null">
+        RSTARTTIME = #{rstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rendtime != null">
+        RENDTIME = #{rendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirm != null">
+        CONFIRM = #{confirm,jdbcType=BIT},
+      </if>
+      <if test="createman != null">
+        CREATEMAN = #{createman,jdbcType=INTEGER},
+      </if>
+      <if test="watchman != null">
+        WATCHMAN = #{watchman,jdbcType=INTEGER},
+      </if>
+      <if test="auditman != null">
+        AUDITMAN = #{auditman,jdbcType=INTEGER},
+      </if>
+      <if test="rtype != null">
+        RTYPE = #{rtype,jdbcType=VARCHAR},
+      </if>
+      <if test="rleve != null">
+        RLEVE = #{rleve,jdbcType=VARCHAR},
+      </if>
+      <if test="rcontext != null">
+        RCONTEXT = #{rcontext,jdbcType=VARCHAR},
+      </if>
+      <if test="scope != null">
+        SCOPE = #{scope,jdbcType=VARCHAR},
+      </if>
+      <if test="sgccconfirm != null">
+        SGCCCONFIRM = #{sgccconfirm,jdbcType=BIT},
+      </if>
+      <if test="dpconfirm != null">
+        DPCONFIRM = #{dpconfirm,jdbcType=BIT},
+      </if>
+      <if test="sgccsdconfirm != null">
+        SGCCSDCONFIRM = #{sgccsdconfirm,jdbcType=BIT},
+      </if>
+      <if test="rwindow != null">
+        RWINDOW = #{rwindow,jdbcType=BIT},
+      </if>
+      <if test="isdown != null">
+        ISDOWN = #{isdown,jdbcType=BIT},
+      </if>
+      <if test="isruntypechange != null">
+        ISRUNTYPECHANGE = #{isruntypechange,jdbcType=BIT},
+      </if>
+      <if test="risk != null">
+        RISK = #{risk,jdbcType=VARCHAR},
+      </if>
+      <if test="timecode != null">
+        TIMECODE = #{timecode,jdbcType=VARCHAR},
+      </if>
+      <if test="sgcccsconfirm != null">
+        SGCCCSCONFIRM = #{sgcccsconfirm,jdbcType=BIT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.james.ssm.po.Recondition">
+    update RECONDITION
+    set NU = #{nu,jdbcType=VARCHAR},
+      RNAME = #{rname,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      RSTARTTIME = #{rstarttime,jdbcType=TIMESTAMP},
+      RENDTIME = #{rendtime,jdbcType=TIMESTAMP},
+      CONFIRM = #{confirm,jdbcType=BIT},
+      CREATEMAN = #{createman,jdbcType=INTEGER},
+      WATCHMAN = #{watchman,jdbcType=INTEGER},
+      AUDITMAN = #{auditman,jdbcType=INTEGER},
+      RTYPE = #{rtype,jdbcType=VARCHAR},
+      RLEVE = #{rleve,jdbcType=VARCHAR},
+      RCONTEXT = #{rcontext,jdbcType=VARCHAR},
+      SCOPE = #{scope,jdbcType=VARCHAR},
+      SGCCCONFIRM = #{sgccconfirm,jdbcType=BIT},
+      DPCONFIRM = #{dpconfirm,jdbcType=BIT},
+      SGCCSDCONFIRM = #{sgccsdconfirm,jdbcType=BIT},
+      RWINDOW = #{rwindow,jdbcType=BIT},
+      ISDOWN = #{isdown,jdbcType=BIT},
+      ISRUNTYPECHANGE = #{isruntypechange,jdbcType=BIT},
+      RISK = #{risk,jdbcType=VARCHAR},
+      TIMECODE = #{timecode,jdbcType=VARCHAR},
+      SGCCCSCONFIRM = #{sgcccsconfirm,jdbcType=BIT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

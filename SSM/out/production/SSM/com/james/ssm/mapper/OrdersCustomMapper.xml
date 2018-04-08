@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.james.ssm.mapper.OrdersCustomMapper">
+
+
+	<resultMap type="com.james.ssm.po.Orders" id="findOrderUserResultMap">
+		<id column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="number" property="number" />
+		<result column="createTime" property="createTime" />
+		<result column="note" property="note" />
+		<association property="user" javaType="com.james.ssm.po.User">
+			<id column="user_id" property="id" />
+			<result column="username" property="username" />
+			<result column="sex" property="sex" />
+			<result column="birthday" property="birthday" />
+			<result column="address" property="address" />
+		</association>
+	</resultMap>
+	<resultMap type="com.james.ssm.po.Orders" id="findOrderUserResultMapO2M">
+
+		<id column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="number" property="number" />
+		<result column="createTime" property="createTime" />
+		<result column="note" property="note" />
+		<association property="user" javaType="com.james.ssm.po.User">
+			<id column="user_id" property="id" />
+			<result column="username" property="username" />
+			<result column="sex" property="sex" />
+			<result column="birthday" property="birthday" />
+			<result column="address" property="address" />
+		</association>
+		<collection property="orderDetail" ofType="com.james.ssm.po.OrderDetail">
+			<id column="orderdetail_id" property="id" />
+			<result column="orders_id" property="orders_id" />
+			<result column="items_id" property="items_id" />
+			<result column="items_num" property="items_num" />
+		</collection>
+
+	</resultMap>
+	<resultMap type="com.james.ssm.po.User" id="findUserAndItemsByM2MresultMap">
+		<id column="user_id" property="id" />
+
+		<result column="username" property="username" />
+		<result column="sex" property="sex" />
+		<result column="birthday" property="birthday" />
+		<result column="address" property="address" />
+		<collection property="orders" ofType="com.james.ssm.po.Orders">
+			<id column="id" property="id" />
+			<result column="user_id" property="userId" />
+			<result column="number" property="number" />
+			<result column="createTime" property="createTime" />
+			<result column="note" property="note" />
+			<collection property="orderDetails" ofType="com.james.ssm.po.OrderDetail">
+				<id column="orderdetail_id" property="id" />
+				<result column="orders_id" property="orders_id" />
+				<result column="items_id" property="items_id" />
+				<result column="items_num" property="items_num" />
+				<association property="items" javaType="com.james.ssm.po.Items">
+					<id column="items_id" property="id" />
+					<result column="items_name" property="name" />
+					<result column="price" property="price" />
+					<result column="detail" property="detail" />
+				</association>
+			</collection>
+		</collection>
+
+	</resultMap>
+	<!-- 延迟加载resultMap -->
+	<resultMap type="com.james.ssm.po.Orders" id="findOrderLazyUserMap">
+		<id	 column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="number" property="number" />
+		<result column="createTime" property="createTime" />
+		<result column="note" property="note" />
+		<association property="user"  javaType="com.james.ssm.po.User" select="com.james.mapper.UserMapper.selectById"  column="user_id">
+		</association>
+	</resultMap>
+	<!-- 多对多resultMap -->
+	<select id="findUserAndItemsByM2M" resultMap="findUserAndItemsByM2MresultMap">
+		SELECT
+		orders.*,
+		user.address,
+		user.username,
+		user.sex,
+		user.birthday,
+		orderdetail.items_id,
+		orderdetail.items_num,
+		orderdetail.orders_id,
+		orderdetail.id orderdetail_id,
+		items.id items_id,
+		items.createtime,
+		items.name items_name,
+		items.price,
+		items.detail
+		FROM
+		orders,
+		user,
+		orderdetail,
+		items
+		WHERE orders.user_id = user.id
+		AND orders.id =
+		orderdetail.orders_id
+		AND orderdetail.items_id=items.id
+	</select>
+
+<!-- lazyloading -->
+	<select id="findOrderLazyUser"  resultMap="findOrderLazyUserMap" >
+	select *  from orders
+	
+	</select>
+
+	<!-- 一对一示范resultMap -->
+	<select id="findOrderUserByresultMap" resultMap="findOrderUserResultMap">
+		SELECT
+		orders.*,user.address,user.username,user.sex,user.birthday FROM
+		orders,user WHERE
+		orders.user_id=user.id
+
+	</select>
+	<!-- 一对多示范resultMap -->
+	<select id="findOrderUserOrderDetailByresultMapO2M" resultMap="findOrderUserResultMapO2M">
+
+		SELECT
+		orders.*,user.address,user.username,user.sex,user.birthday,orderdetail.items_id,orderdetail.items_num,orderdetail.orders_id,orderdetail.id
+		orderdetail_id FROM orders,user,orderdetail WHERE
+		orders.user_id=user.id AND orders.id=orderdetail.orders_id
+
+
+	</select>
+
+	<!-- 一对一示范resultType -->
+	<select id="findOrdersUser" resultType="com.james.ssm.po.OrdersCustom">
+
+		SELECT
+		orders.*,user.address,user.username FROM orders,user WHERE
+		orders.user_id=user.id
+
+	</select>
+
+</mapper>
+

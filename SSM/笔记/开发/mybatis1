@@ -1,0 +1,252 @@
+### mybatis开发步骤
+
+
+
+>   mybatis运行需具备3个基本要素
+<br>具备要素包括：<br>1、mybatis-config.xml,<br>2、log4j.properties <br>3、mapper配置文件 UserMapper.xml <br>4、db.properties配置  
+-   加包（jar包列表如下）
+
+        asm-3.3.1.jar
+        cglib-2.2.2.jar
+        commons-logging-1.1.1.jar
+        javassist-3.17.1-GA.jar
+        junit-4.9.jar
+        log4j-1.2.17.jar
+        log4j-api-2.0-rc1.jar
+        log4j-core-2.0-rc1.jar
+        mybatis-3.2.7.jar
+        mysql-connector-java-5.1.7-bin.jar
+        slf4j-api-1.7.5.jar
+        slf4j-log4j12-1.7.5.jar
+        
+-   mybatis-config.xml
+
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        <configuration>
+        <properties resource="db.properties" />
+            <settings>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="cacheEnabled" value="true"/>
+        </settings>
+    
+        <environments default="development">
+            <environment id="development">
+                <transactionManager type="JDBC" />
+                <dataSource type="POOLED">
+                    <property name="driver" value="${jdbc.driver}" />
+                    <property name="url" value="${jdbc.url}" />
+                    <property name="username" value="${jdbc.username}" />
+                    <property name="password" value="${jdbc.password}" />
+                </dataSource>
+            </environment>
+        </environments>
+
+        <mappers>
+            <mapper resource="com/james/mapper/UserMapper.xml"></mapper>
+            <!-- 单个加载 <mapper class="com.james.mapper.UserMapper"></mapper> -->
+            <!-- 批量加载 
+            <package name="com.james.mapper" />
+        -->
+            </mappers>
+        </configuration>
+-   log4j.properties
+
+        log4j.rootLogger=DEBUG, Console
+        #Console
+        log4j.appender.Console=org.apache.log4j.ConsoleAppender
+        log4j.appender.Console.layout=org.apache.log4j.PatternLayout
+        log4j.appender.Console.layout.ConversionPattern=%d [%t] %-5p [%c] - %m%n
+        log4j.logger.java.sql.ResultSet=INFO
+        log4j.logger.org.apache=INFO
+        log4j.logger.java.sql.Connection=DEBUG
+        log4j.logger.java.sql.Statement=DEBUG
+        log4j.logger.java.sql.PreparedStatement=DEBUG
+        
+-   mapper配置文件 UserMapper.xml
+
+
+            <?xml version="1.0" encoding="UTF-8" ?>
+            <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+            <mapper namespace="com.james.mapper.UserMapper">
+                <cache  type="org.mybatis.caches.ehcache.EhcacheCache"/>
+                <sql id="queryUserWhere">
+                        <if test="userCustom  != null">
+                        <if test="userCustom.sex != null">
+                        and  user.sex=#{userCustom.sex}
+                        </if>
+                        <if test="userCustom.username != null">
+                            AND user.username LIKE '%${userCustom.username}%' 
+                        </if>
+                    </if>
+                </sql>
+                <sql id="queryIds">
+                <if test="ids != null">
+                    <foreach collection="ids" item="user_id" open=" and (" close=")" separator="or">
+                    id = #{ user_id}
+                    </foreach>
+                </if>
+                </sql>
+                <select id="selectById" parameterType="int" resultType="com.james.po.User">
+                    select * from user where id = #{id}
+                </select>
+                <insert id="insertUser" parameterType="com.james.po.User">
+                    insert into user(username,birthday,sex,address) values(#{username},#{birthday},#{sex},#{address})
+                </insert>
+                <delete  id="deleteUserById" parameterType="int">
+                     delete from user  where id = #{id} 
+                </delete>
+                <select id='FindUserByName' parameterType="java.lang.String">
+                    select * from user where username like '%${value}%'
+                </select>
+                <update id="updateUser"  parameterType="com.james.po.User">
+                    update user set
+                      username = #{username},
+                      birthday = #{birthday},
+                      sex = #{sex},
+                      address = #{address}
+                    where id = #{id}
+                </update>
+                <select id="findUserList"  parameterType="com.james.po.UserQueryVo" resultType="com.james.po.UserCustom">
+                    SELECT * FROM user   
+                    <where>
+                    <include refid="queryUserWhere"></include>
+                    </where>
+                </select>
+                    <select id="findUserListCount"  parameterType="com.james.po.UserQueryVo" resultType="int">
+                    SELECT count(*) FROM user 
+                    <where>
+                     <include refid="queryUserWhere"></include>
+                    </where>
+                </select>
+                <select id="findUserListbyOr" parameterType="com.james.po.UserQueryVo" resultType="com.james.po.UserCustom">
+                   select *  from user 
+                    <where>
+                         <include refid="queryIds"/>
+                    </where>
+                </select>
+            </mapper>
+
+-   测试文件
+        package com.james.mapper;
+        
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.util.ArrayList;
+        import java.util.List;
+        
+        import org.apache.ibatis.io.Resources;
+        import org.apache.ibatis.session.SqlSession;
+        import org.apache.ibatis.session.SqlSessionFactory;
+        import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+        import org.junit.Before;
+        import org.junit.Test;
+        
+        import com.james.po.User;
+        import com.james.po.UserCustom;
+        import com.james.po.UserQueryVo;
+        
+                public class UserMapperTest {
+            SqlSessionFactory sqlSessionFactory;
+            
+            @Before
+            public void createSessionFactory() {
+                String resource = "mybatis-config.xml";
+                InputStream inputStream=null;
+                try {
+                    inputStream = Resources.getResourceAsStream(resource);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            }
+	
+        
+        @Test
+        public void testSelectById() {
+            
+            SqlSession sqlSession=sqlSessionFactory.openSession();
+            UserMapper mapper=sqlSession.getMapper(UserMapper.class);
+            User user = mapper.selectById(16);
+            System.out.println(user.getUsername());
+        }
+        
+        @Test
+        public void testFindUserList() {
+            SqlSession sqlSession=sqlSessionFactory.openSession();
+            UserMapper mapper=sqlSession.getMapper(UserMapper.class);
+            UserQueryVo userQueryVo=new UserQueryVo();
+            UserCustom userCustom=new UserCustom();
+            userCustom.setUsername("张");
+            userCustom.setSex("1");
+            userQueryVo.setUserCustom(userCustom);
+            List<UserCustom> userCustoms = mapper.findUserList(userQueryVo);
+            for(UserCustom u:userCustoms) {
+                System.out.println(u.getUsername());
+            }
+        }
+        
+        @Test
+        public void testfindUserListCount() {
+            SqlSession sqlSession=sqlSessionFactory.openSession();
+            UserMapper mapper=sqlSession.getMapper(UserMapper.class);
+            UserQueryVo userQueryVo=new UserQueryVo();
+            UserCustom userCustom=new UserCustom();
+            userCustom.setUsername("张");
+    
+            userQueryVo.setUserCustom(userCustom);
+            int count = mapper.findUserListCount(userQueryVo);
+            System.out.println(count);
+        }
+        
+        @Test
+        public void testfindUserListbyOr() {
+            SqlSession sqlSession=sqlSessionFactory.openSession();
+            UserMapper mapper=sqlSession.getMapper(UserMapper.class);
+            UserQueryVo userQueryVo=new UserQueryVo();
+            List<Integer> ids=new ArrayList<Integer>();
+            ids.add(16);
+            ids.add(22);
+            ids.add(24);
+            ids.add(25);
+            userQueryVo.setIds(ids);
+            List<UserCustom> count = mapper.findUserListbyOr(userQueryVo);
+            System.out.println(count);	
+            
+        }
+        
+        
+        
+        @Test
+        public void testFindUserByIdCache2() {
+            SqlSession sqlSession1=sqlSessionFactory.openSession();
+            SqlSession sqlSession2=sqlSessionFactory.openSession();
+            SqlSession sqlSession3=sqlSessionFactory.openSession();
+            UserMapper mapper1=sqlSession1.getMapper(UserMapper.class);
+            User user = mapper1.selectById(16);
+            System.out.println(user.getUsername());
+            sqlSession1.close();
+            UserMapper mapper2=sqlSession2.getMapper(UserMapper.class);
+            User user2 = mapper2.selectById(16);
+            System.out.println(user2.getUsername());
+            sqlSession1.close();
+            UserMapper mapper3=sqlSession3.getMapper(UserMapper.class);
+            User user3 = mapper3.selectById(16);
+            user3.setUsername("张大明");
+            sqlSession3.commit();
+            User user4 = mapper3.selectById(16);
+            System.out.println(user3.getUsername());
+            
+        }
+    }
+
+-   db.properties配置
+
+        jdbc.driver=org.mariadb.jdbc.Driver
+        jdbc.url=jdbc:mariadb://192.168.56.222:3306/mybaties
+        jdbc.username=root
+        jdbc.password=root
