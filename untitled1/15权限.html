@@ -1,0 +1,133 @@
+<!document html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>this is test page</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <style>
+        .dv1{
+            border:1px solid #000;
+            margin-top:10px;
+            margin-left:10px;
+            width:300px;
+            height:200px;
+            float:left;}
+        .mdiv{
+            border:1px solid #000;
+            margin-top:10px;
+            margin-left:10px;
+            width:70px;
+            height:200px;
+            float:left;}
+
+
+        .dv2{
+            border:1px solid #000;
+            margin-top:10px;
+            margin-left:10px;
+            width:300px;
+            height:200px;
+            float:left;}
+
+
+        #table1{
+            border:1px solid #5aa398;
+        }
+        ul li{
+            list-style:none;
+
+        }
+
+    </style>
+
+    <script>
+        $(function(){
+            var v=0;
+            var data=[{"pname":"王小华","page":"23"},{"pname":"xiaowang","page":"23"}];
+            for(var p in data){
+                $("#table1").append("<tr><td>"+v+"</td><td>"+data[p].pname+"</td><td>"+data[p].page+"</td><td><input type='button' id='atag"+0+"' value='delete'></td><td><input type='button' id='udate"+0+"'  value='update'></td></tr>");
+            }
+
+
+
+
+            $("#btn").click(function(){
+
+                $("#table1").append("<tr><td>1</td><td>xiaoming</td><td>28</td></tr>");
+
+            });
+
+
+            $("#addperson").click(function(){
+                var b=$("#pname").val();
+                var c=$("#page").val();
+                v++;
+                $("#table1").append("<tr><td>"+v+"</td><td>"+b+"</td><td>"+c+"</td><td><input type='button' id='atag"+v+"' value='delete'></td><td><input type='button' id='udate"+v+"' value='update'></td></tr>");
+                $("#atag"+v).click(function(){
+                    var m=$(this).parent().parent().children("td:first-child").text();
+                    $(this).parent().parent().remove();
+                });
+                $("#udate"+v).click(function(){
+                    var name=($(this).parent().parent().children("td:nth-child(2)").text());
+                    var age=($(this).parent().parent().children("td:nth-child(3)").text());
+                    $(this).parent().parent().children("td:nth-child(2)").text("").append("<input type='text' value='"+name+"'>");
+                    $(this).parent().parent().children("td:nth-child(3)").text("").append("<input type='text' value='"+age+"'>");
+
+                });
+
+
+            });
+
+
+            $("#dv1 ul li").dblclick(function(){
+                $(this).appendTo("#ul2");
+            });
+
+
+            $("#ul2 li").dblclick(function(){
+                alert("bbbbb");
+            });
+
+        });
+        jQuery.fn.bbq=function(){
+            alert("bbbbb");
+        }
+
+    </script>
+
+</head>
+<body>
+<input type="button" value="button" id="btn">
+<br>
+<input type="text" id="pname"> <input type="text" id="page">
+<input type="button" value="add" id="addperson">
+
+<table id="table1">
+    <tr><td>id</td><td>name</td><td>age</td><td>opt1</td><td>opt2</td></tr>
+</table>
+
+
+
+<div class="dv1" id="dv1">
+    <ul id="ul1">
+        <li><input type="checkbox">增加</li>
+        <li>删除</li>
+        <li>修改</li>
+        <li>阉割</li>
+    </ul>7
+0
+</div>
+<div class="mdiv" id="mdiv">
+    <input type="button" size="5" style="width: 70px;" value=">" id="toright"><br>
+    <input type="button" size="5" style="width: 70px;"  value="<" id="toleft"><br>
+    <input type="button" size="5" style="width: 70px;"  value=">>" id="alltoright"><br>
+    <input type="button" size="5" style="width: 70px;" 3 value="<<" id="alltoleft">
+</div>
+<div class="dv2" id="dv2">
+    <ul id="ul2">
+    </ul>
+</div>
+
+</body>
+</html>

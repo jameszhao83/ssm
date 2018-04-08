@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script>
+    $(function () {
+        $("#btn").click(function () {
+            $(".cls").css("background-color","green");
+            console.log( $(".cls").css("background-color"));
+        });
+    });
+
+</script>
+<style>
+    .cls{
+        width:200px;
+        height: 100px;
+        background-color: pink;
+    }
+
+</style>
+<body>
+<input type="button" value="button" id="btn">
+<div class="cls" id="cls"></div>
+<p class="cls">
+    this is p tag
+</p>
+<p>
+
+    为加强和规范国家电网公司（以下简称“公司”）网络与信息系统安全工作，切实提高防攻击、防篡改、防病毒、防瘫痪、防窃密
+</p>
+</body>
+</html>

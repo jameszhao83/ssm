@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01Jquery与dom对象转换</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+
+<input type="button" value="clickme" id="btn">
+<input type="button" value="clickme" id="btn2">
+
+<input type="button" value="clickme" id="btn3">
+</body>
+<script type="text/javascript">
+var btnobj=document.getElementById("btn");
+$(btnobj).click(function () {
+    console.log("dom conver jquery object");
+});
+var jqbtn=$("#btn2");
+    jqbtn.click(function () {
+        console.log("jquery get  jquery object");
+    });
+
+
+    var jqbtn2=$("#btn3");
+    jqbtn2[0].onclick=function () {
+        console.log("jquery object  conver to  dom  object ");
+    }
+</script>
+</html>

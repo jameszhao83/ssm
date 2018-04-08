@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <style>
+        .cls{
+            background-color: aquamarine;
+        }
+    </style>
+    <script>
+        $(function () {
+            $("p.cls,span.cls").css("background-color","rgb(255, 0, 0)");
+            $("#btn").click(function () {
+                gogo=$("p.cls").css("background-color");
+                if(gogo == "rgb(255, 0, 0)"){
+                    $("p.cls").css("background-color","green");
+                }else{
+                    $("p.cls,span.cls").css("background-color","rgb(255, 0, 0)");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<input type="button" value="button" id="btn" class="btn">
+<p class="cls">高防攻击、防篡改、防病毒、防瘫痪、防窃密</p>
+<p >防窃密</p>
+<ul class="uu">
+    <li>防篡改
+</li>
+    <li>
+防病毒
+</li>
+    <li>
+防瘫痪</li>
+</ul>
+<span class="cls">
+    为加强和规范国家电网公司（以下简称“公司”）网络与信息系统安全工作，切实提高防攻击、防篡改、防病毒、防瘫痪、防窃密
+</span>
+</body>
+</html>
+

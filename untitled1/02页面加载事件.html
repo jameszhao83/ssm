@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+<button class="btn" id="btn">bigbutton</button>
+</body>
+<script>
+$("#btn").click(function () {
+
+});
+//dom的onload加载方式
+//window.onload=function () {
+//    alert("this is  onload");
+//};
+//当页面所有元素全部加载完毕后触发onload事件
+    $(window).load(function () {
+        console.log("this is jquery onload");
+    });
+
+
+    $(document).ready(function () {
+        console.log("document ready");
+    });
+    jQuery(function () {
+        console.log("jquery load")
+    });
+    $(function () {
+        console.log("$ load");
+    });
+</script>
+</html>

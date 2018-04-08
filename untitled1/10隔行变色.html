@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btn").click(function () {
+                $("#ul1>li:odd").css("background-color","red");
+                $("#ul1>li:even").css("background-color","green");
+                $("#ul1>li:first").css("background-color","aquamarine");
+            });
+        });
+
+    </script>
+</head>
+<body>
+<input type="button" value="btn" id="btn">
+
+<ul id="ul1">
+    <li>应急演练</li>
+    <li>功能升级+性能调优</li>
+    <li>功能升级</li>
+    <li>应急演练</li>
+    <li>性能调优</li>
+    <li>性能调优</li>
+</ul>
+</body>
+</html>

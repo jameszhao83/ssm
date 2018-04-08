@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btn").click(function () {
+
+                console.log($(this).val());
+
+
+                if ($(this).val() == 'rain'){
+                    $(this).val("button");
+                }else {
+                    $(this).val("rain");
+                }
+            });
+        });
+        
+    </script>
+</head>
+<body>
+<button id="btn1" value="button"></button>
+<br>
+<input id="btn" type="button" value="button">
+</body>
+</html>

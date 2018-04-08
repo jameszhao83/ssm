@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+</head>
+
+<style>
+    *{
+        padding: 0px;
+        margin: 0px;;
+        list-style: none;
+    }
+
+</style>
+<script>
+    $(function () {
+        $("li").mouseenter(function () {
+            $(this).prevAll().css("background-color","red");
+            $(this).css("background-color","pink");
+            $(this).nextAll().css("background-color","blue");
+        }).mouseleave(function () {
+            $(this).prevAll().css("background-color","");
+            $(this).css("background-color","");
+            $(this).nextAll().css("background-color","");
+        }).click(function () {
+
+        });
+    });
+
+
+</script>
+<body>
+
+
+<ul id="u1">
+    <li>夏琨</li>
+    <li>彭骞</li>
+    <li>徐悦</li>
+    <li>王堃</li>
+    <li>刘思尧</li>
+    <li>李雪松</li>
+</ul>
+</body>
+</html>

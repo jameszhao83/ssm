@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function () {
+            var i=2;
+            $("#btn").click(function () {
+                if(i%2 == 0){
+                    $("#dv1").css("width","200px");
+                    $("#dv1").css("height","200px");
+                    $("#dv1").css("background-color","aqua");
+                }else{
+
+                    $("#dv1").css("width","0px");
+                    $("#dv1").css("height","0px");
+                    $("#dv1").css("background-color","aqua");
+
+                }
+                i++;
+            });
+        });
+    </script>
+</head>
+<body>
+<input type="button"  value="显示" id="btn">
+
+<div id="dv1"></div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <style>
+        .cls{
+            background-color: black;
+        }
+
+    </style>
+    <script>
+        $(function () {
+            $("#btn").click(function () {
+//                style one
+//                $("body").toggleClass("cls");
+//                style two
+                if ($("body").hasClass("cls")){
+                    $("body").removeClass("cls");
+                }else {
+                    $("body").addClass("cls");
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+<input type="button" value="button" id="btn">
+</body>
+</html>

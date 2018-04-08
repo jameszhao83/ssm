@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <style>
+        .dv1{
+            width: 290px;
+            height: 300px;
+        background-color: aquamarine;;
+        }
+
+    </style>
+    <script>
+        jQuery
+        $(function () {
+            $("#btn").click(function () {
+
+                if( $(this).val() == "隐藏"){
+                    $(this).val("显示");
+                    $("#dv1").show(100);
+                }else{
+                    $(this).val("隐藏");
+                    $("#dv1").hide(100);
+                }
+
+            });
+        });
+
+    </script>
+</head>
+<body>
+<input type="button" value="显示" id="btn">
+<div id="dv1" class="dv1">
+
+</div>
+
+
+<table id="tb" style="border: 1px;">
+    <tr>
+        <td>序号</td>
+        <td>选择器名称</td>
+        <td>用法</td>
+        <td>备注</td>
+    </tr>
+    <tr><td>1 </td><td>id选择器选择器</td><td>$("#id属性值")</td><td></td></tr>
+    <tr><td>2 </td><td>标签选择器</td><td>$("p 标签名称")</td><td></td></tr>
+    <tr><td>3 </td><td>类选择器</td><td>$(".类样式名字")</td><td></td></tr>
+    <tr><td> 4</td><td>交集选择器</td><td>$("标签.样式的名字")</td><td></td></tr>
+    <tr><td>5 </td><td>并集选择器</td><td>$("选择器，选择器，选择器，选择器。。。")</td><td></td></tr>
+    <tr><td>6 </td><td>索引选择器</td><td>$("选择器:eq（索引的值）")</td><td></td></tr>
+    <tr><td>7 </td><td>奇数选择器</td><td>$("选择器:odd")</td><td></td></tr>
+    <tr><td>8 </td><td>偶数选择器</td><td>$("选择器：even")</td><td></td></tr>
+    <tr><td> 9</td><td>筛选选择器</td><td>$("选择器:lt(索引)") or $("选择器:gt(索引)")</td><td></td></tr>
+    <tr><td>10</td><td>最后一个选择器</td><td>$("选择器:last")</td><td></td></tr>
+    <tr><td>11</td><td>第一个选择器</td><td>$("选择器：first")</td><td></td></tr>
+    <tr><td>12</td><td>下一个选择器</td><td>$("当前元素.next()")</td><td></td></tr>
+    <tr><td>13</td><td>当前元素选择器</td><td>$("当前元素.nextAll()")</td><td></td></tr>
+
+
+
+</table>
+</body>
+</html>
