@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+$(function () {
+    $("#btn").click(function () {
+        /**
+         * 方法1
+         */
+        //        $("#ck6").attr("checked",true);
+        /**
+         * 方法2
+         */
+        $("#ck6").prop("checked",true);
+        /**
+         * 判断是否选中
+         */
+        console.log($("#ck6").prop("checked"));
+    });
+
+    $("#btn1").click(function (){
+        if($("#getout").prop("checked")){
+            $("#getout").prop("checked",false);
+        }else {
+            $("#getout").prop("checked",true);
+        }
+
+    });
+$("#checkAll").click(function () {
+    if($("#checkAll").prop("checked")){
+        $("#tbody1").find("input").prop("checked",true);
+    }else{
+        $("#tbody1").find("input").prop("checked",false);
+    }
+  
+    
+});
+    $("#tbody1").find("input").click(function () {
+        var alength=$("#tbody1").find("input").length;
+        var blength=$("#tbody1 :checked").length;
+        if(alength == blength){
+            $("#checkAll").prop("checked",true);
+        }else{
+            $("#checkAll").prop("checked",false);
+        }
+    });
+});
+
+
+    </script>
+</head></html>
+
+<body>
+<input type="button" value="thisisbtn" id="btn">
+</br>
+<input type="checkbox" value="1" name="play"/>信息化预算执行总体完成率</br>
+<input type="checkbox" value="2" name="play"/>规划计划执行进度完成率</br>
+<input type="checkbox" value="3" name="play"/>信息化项目建设进度</br>
+<input type="checkbox" value="4" name="play"/>信息化项目实施重点工作</br>
+<input type="checkbox" value="5" name="play"/>信息化项目IRS文档管理</br>
+<input type="checkbox" value="6" name="play" id="ck6"/>信息化项目建设实施厂商评价</br>
+
+
+<input type="button" value="switch" id="btn1">
+<input type="checkbox" value="1" id="getout"/>选中切换</br>
+
+</br></br></br>
+<table id="tb1"    id="tb"  style=" border:1px solid #000;">
+    <tr><th><input type="checkbox" id="checkAll"></th><th>指标名称</th><th>指标类型</th></tr>
+    <tbody id="tbody1">
+    <tr><td><input type="checkbox" id="cb1"></td><td>安全专用装置规范指数</td><td>安全类指标</td></tr>
+    <tr><td><input type="checkbox" id="cb2"></td><td>安全技防措施级联贯通率</td><td>安全类指标</td></tr>
+    <tr><td><input type="checkbox" id="cb3"></td><td>技防措施建设执行情况</td><td>安全类指标</td></tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

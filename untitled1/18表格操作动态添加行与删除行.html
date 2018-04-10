@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--支持移动设备优先-->
+    <meta name="viewport"  content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.css">
+    <script src="js/bootstrap/js/bootstrap.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#myModal").hide();
+            $("#closewindow").click(function () {
+                $("#myModal").hide();
+            });
+            $("#closewindows").click(function () {
+                $("#myModal").hide();
+
+            });
+
+            $("#btn").click(function () {
+                $("#workname").val("");
+                $("#workplan").val("");
+                $("#myModal").show();
+            });
+
+            $("#saveWork").click(function () {
+                alert("safdas");
+                var workname=$("#workname").val();
+                var workplan=$("#workplan").val();
+                $("<tr><td><input type='checkbox'></td><td>2</td><td>"+workname+"</td><td>"+workplan+"</td><td></td></tr>").appendTo("#tbodyb");
+
+                $("#myModal").hide();
+
+
+            });
+            $("#btupdate").click(function () {
+                var alength=$("#tbodyb").find("input").length;
+                var blength=$("#tbodyb :checked").length;
+                var b=$("#tbodyb :checked");
+                if(blength>1){
+                    alert("修改时只能选择1项");
+                }else{
+                    alert(b.parent().parent().children("td:nth-child(2)").text());
+
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <br>
+
+    <input type="button" class="btn btn-info" value="添加" id="btn">&nbsp;<input type="button" class="btn btn-info" value="修改" id="btupdate">&nbsp;<input type="button" class="btn btn-info" value="删除" id="btdelete">&nbsp;<input type="button" class="btn btn-info" value="复制" id="cpdelete">
+    <br>
+    <hr>
+<table class="table  table-striped  table-bordered  table-hover  table-condensed"  >
+
+    <tr><th>选择</th><th>序号</th><th>工作名称</th><th>工作计划</th><th>操作</th></tr>
+    <tbody id="tbodyb">
+    <tr><td><input type="checkbox"   id="cb1"></td><td>1</td><td>大力发展</td><td>蝇营狗苟</td><td>工作计划</td></tr>
+    <tr><td><input type="checkbox"   id="cb2"></td><td>2</td><td>努力弘扬</td><td>踌躇不前</td><td>工作计划</td></tr>
+    </tbody>
+</table>
+
+    <div  class="modal" id="myModal" style="width: 570px;" role="window"  >
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" id="closewindow">
+                        X
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">检修计划</h4>
+
+                </div>
+                <div class="modal-body">
+                    <table  class="table" >
+                        <tr>
+                            <td>工作名称：</td>
+                            <td  > <input type="text" id="workname" size="90"></td>
+                        </tr>
+                        <tr>
+                            <td>工作计划：</td>
+                            <td  > <input type="text"  id="workplan" size="90"></td>
+                        </tr>
+                  </td>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="saveWork" class="btn btn-success">保存</a>
+                                      <a href="#" class="btn  btn-danger" id="closewindows" data-dismiss="modal">取消</a>
+                </div>
+            </div>
+
+
+
+
+    </div>
+</div>
+</body>
+</html>

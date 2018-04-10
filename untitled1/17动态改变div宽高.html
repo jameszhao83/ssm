@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+    #dv1{
+        width: 200px;
+        height: 200px;
+        background-color: #5aa398;
+
+    }
+
+
+</style>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+
+        $(function () {
+
+
+        $("#btn").click(function () {
+            alert($("#iheight").val());
+            var height=$("#iheight").val();
+            var width=$("#iwdth").val();
+             $("#dv1").height(height+"px");
+            $("#dv1").width(width+"px");
+        });
+        });
+
+    </script>
+</head>
+
+<body>
+<label>高</label><input type="text" id="iheight">
+<label>宽</label><input type="text" id="iwdth">
+<input type="button" value="change" id="btn">
+
+<div id="dv1"></div>
+</body>
+</html>

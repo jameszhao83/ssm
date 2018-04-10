@@ -80,16 +80,22 @@
             });
 
 
-            $("#dv1 ul li").dblclick(function(){
-                $(this).appendTo("#ul2");
+         $("#alltoright").click(function () {
+             $("#se1>option").appendTo($("#se2"));
+         });
+            $("#alltoleft").click(function () {
+                $("#se2>option").appendTo($("#se1"));
             });
 
-
-            $("#ul2 li").dblclick(function(){
-                alert("bbbbb");
+            $("#toright").click(function () {
+                $("#se1>option:selected").appendTo($("#se2"));
             });
-
+            $("#toleft").click(function () {
+                $("#se2>option:selected").appendTo($("#se1"));
+            });
         });
+
+
         jQuery.fn.bbq=function(){
             alert("bbbbb");
         }
@@ -110,13 +116,13 @@
 
 
 <div class="dv1" id="dv1">
-    <ul id="ul1">
-        <li><input type="checkbox">增加</li>
-        <li>删除</li>
-        <li>修改</li>
-        <li>阉割</li>
-    </ul>7
-0
+
+    <select  id="se1" multiple="multiple"  size="6"  style="height:80px;">
+    <option value="增加">增加</option>
+    <option value="删除">删除</option>
+    <option value="修改">修改</option>
+    <option value="阉割">阉割</option>
+    </select>
 </div>
 <div class="mdiv" id="mdiv">
     <input type="button" size="5" style="width: 70px;" value=">" id="toright"><br>
@@ -125,8 +131,9 @@
     <input type="button" size="5" style="width: 70px;" 3 value="<<" id="alltoleft">
 </div>
 <div class="dv2" id="dv2">
-    <ul id="ul2">
-    </ul>
+    <select  id="se2" multiple="multiple"  size="6"  style="height:80px;">
+
+    </select>
 </div>
 
 </body>
