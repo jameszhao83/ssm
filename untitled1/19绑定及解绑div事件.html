@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"  content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.css">
+    <script src="js/bootstrap/js/bootstrap.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function () {
+            $("#btn1").click(function () {
+//                $("#dv1").mouseenter(function () {
+//                    console.log("enter");
+//                }).mouseleave(function () {
+//                    console.log("leave");
+//                });
+                $("#dv1").bind("click",function () {
+                    console.log("click it");
+                })
+
+            });
+            $("#btn2").click(function () {
+                $("#dv1").unbind("click");
+            });
+
+        });
+        
+        
+    </script>
+    <style>
+        #dv1{
+            width: 200px;;
+            height: 200px;
+            border:solid;
+            background-color:rebeccapurple;
+        }
+    </style>
+</head>
+
+<body>
+<input class="btn alert-danger" type="button" value="绑定" id="btn1">&nbsp;<input class="btn alert-danger" type="button" value="解绑" id="btn2">
+
+<div id="dv1">
+
+
+
+</div>
+</body>
+</html>
